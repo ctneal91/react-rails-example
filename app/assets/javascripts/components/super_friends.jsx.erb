@@ -36,7 +36,17 @@ var TopLevel3 = React.createClass({
   },
 
   _handleClick: function(){
-    alert('booom')
+    console.log('click heard on button')
+
+    if (this.state.isGroupHappy === true){
+      this.setState({
+        isGroupHappy: false
+      })
+    } else {
+      this.setState({
+        isGroupHappy: true
+      })
+    }
   },
 
   render: function(){
@@ -56,6 +66,44 @@ var TopLevel3 = React.createClass({
       <div className={div_stylezzz}>
         <h1>The Best Cohort</h1>
         <button onClick={this._handleClick}>Change Mood</button>
+        {jsxRendering}
+      </div>
+    )
+  }
+})
+
+//Part 4 - When state tethers to prop
+var TopLevel4 = React.createClass({
+  getInitialState: function(){
+    var freshPropsList = this.props.app_data.map(function(name){return name})
+    return {
+      theFriendsGroup: freshPropsList
+    }
+  },
+
+  _popOffBye: function(){
+    console.log('somebody bout to get popped')
+
+    var groupCopy = this.state.theFriendsGroup.map(function(name){return name})
+
+    groupCopy.pop()
+
+    this.setState({
+      theFriendsGroup: groupCopy
+    })
+  },
+
+  render: function(){
+    var friendsList = this.state.theFriendsGroup
+
+    var jsxRendering = friendsList.map(function(name){
+      return <p>{name}</p>
+    })
+
+    return (
+      <div className={"happy"}>
+        <h1>The Best Cohort</h1>
+        <button onClick={this._popOffBye}>Pop Off Buddy</button>
         {jsxRendering}
       </div>
     )
