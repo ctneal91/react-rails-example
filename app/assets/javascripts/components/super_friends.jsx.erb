@@ -1,0 +1,63 @@
+// Part 1 - Set up the component
+var TopLevel = React.createClass({
+  render: function (){
+    return (
+      <div>
+        <h1> Say Hi </h1>
+      </div>
+    )
+  }
+})
+
+// Part 2 - Set up our app data
+var TopLevel2 = React.createClass({
+  render: function(){
+    var friendsList = this.props.app_data
+
+    var jsxRendering = friendsList.map(function(name){
+      return <p>{name}</p>
+    })
+
+    return (
+      <div>
+        <h1>Say Hi </h1>
+        {jsxRendering}
+      </div>
+    )
+  }
+})
+
+// Part 3 - Handle Events + Changing State
+var TopLevel3 = React.createClass({
+  getInitialState: function(){
+    return {
+      isGroupHappy: false
+    }
+  },
+
+  _handleClick: function(){
+    alert('booom')
+  },
+
+  render: function(){
+    var friendsList = this.props.app_data
+
+    var jsxRendering = friendsList.map(function(name){
+      return <p>{name}</p>
+    })
+
+    if (this.state.isGroupHappy === true) {
+      var div_stylezzz = "happy"
+    } else {
+      var div_stylezzz = "not-happy"
+    }
+
+    return (
+      <div className={div_stylezzz}>
+        <h1>The Best Cohort</h1>
+        <button onClick={this._handleClick}>Change Mood</button>
+        {jsxRendering}
+      </div>
+    )
+  }
+})
